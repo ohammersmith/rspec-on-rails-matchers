@@ -5,7 +5,7 @@ class Model < ActiveRecord::Base
   has_many :children
   has_one :address
   has_and_belongs_to_many :categories
-  def initialize; end # prevent actual AR initialisation
+  def initialize; end # prevent actual initialisation
 end
 
 describe "'belong_to' matcher" do

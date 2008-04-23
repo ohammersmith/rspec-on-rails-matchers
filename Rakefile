@@ -8,7 +8,7 @@ desc "Run all examples"
 Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/**/*.rb']
   t.rcov = true
-  t.rcov_opts = ['--exclude', '**/*_spec.rb', '--exclude', 'spec_helper.rb']
+  t.rcov_opts = ['--exclude', 'spec_helper.rb,_spec.rb']
 end
 
 desc "Make sure coverage is 100%"
