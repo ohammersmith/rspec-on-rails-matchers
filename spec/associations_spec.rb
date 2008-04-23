@@ -6,6 +6,10 @@ class Model < ActiveRecord::Base
 end
 
 describe "Matcher for 'belongs_to' association" do
+  it "should have the label 'model to belong to <association>'" do
+    belong_to(:foo).description.should == "model to belong to foo"
+  end
+  
   it "should match when a class belongs to the specified model" do
     Model.should belong_to(:another_model)
   end
