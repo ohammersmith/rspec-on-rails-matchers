@@ -3,8 +3,9 @@ require File.dirname(__FILE__) + '/spec_helper'
 class PseudoActiveRecord < ActiveRecord::Base
   # Prevent ActiveRecord initialisation, as we don't have a database
   def initialize; end
-  
+    
   # Fake some ActiveRecord behaviour
+  def id; 1; end
   def method_missing(symbol, *params)
     send $1 if (symbol.to_s =~ /(.*)_before_type_cast$/)
   end
@@ -164,5 +165,51 @@ describe "'validate_length_of' matcher" do
     it "should not match when the validation is not present" do
       @model.should_not validate_length_of(:foo, :is => 4)
     end
+  end
+end
+
+describe "'validate_uniqueness_of' matcher" do
+  class UniquenessModel < PseudoActiveRecord
+    attr_accessor :name
+    validates_uniqueness_of :name
+  end
+
+  before do
+    @model = UniquenessModel.new
+  end
+  
+  it "should have the label 'model to validate the uniqueness of <attr>'" do
+    validate_uniqueness_of(:foo).description.should == "model to validate the uniqueness of foo"
+  end
+  
+  it "should match when the validation is present" do
+    @model.should validate_uniqueness_of(:name)
+  end
+  
+  it "should not match when the validation is not present" do
+    @model.should_not validate_uniqueness_of(:foo)
+  end
+end
+
+describe "'validate_confirmation_of' matcher" do
+  class ConfirmationModel < PseudoActiveRecord
+    attr_accessor :name
+    validates_confirmation_of :name
+  end
+
+  before do
+    @model = ConfirmationModel.new
+  end
+  
+  it "should have the label 'model to validate the confirmation of <attr>'" do
+    validate_confirmation_of(:foo).description.should == "model to validate the confirmation of foo"
+  end
+  
+  it "should match when the validation is present" do
+    @model.should validate_confirmation_of(:name)
+  end
+  
+  it "should not match when the validation is not present" do
+    @model.should_not validate_confirmation_of(:foo)
   end
 end
