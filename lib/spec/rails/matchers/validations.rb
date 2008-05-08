@@ -29,19 +29,32 @@ module Spec
         end
         
         return simple_matcher("model to validate the length of #{attribute} within #{min || 0} and #{max || 'Infinity'}") do |model|
-          invalid = false
+          status = true
+          
+          # First check there are no errors at limits of allowed range
           if !min.nil? && min >= 1
-            model.send("#{attribute}=", 'a' * (min - 1))
-
-            invalid = !model.valid? && model.errors.invalid?(attribute)
+            model.send "#{attribute}=", 'a' * min
+            status = false unless model.valid?
           end
           
           if !max.nil?
-            model.send("#{attribute}=", 'a' * (max + 1))
-
-            invalid ||= !model.valid? && model.errors.invalid?(attribute)
+            model.send "#{attribute}=", 'a' * max
+            status = false unless model.valid?
           end
-          invalid
+          
+          # Now check there are errors just off each end of range
+          if !min.nil? && min >= 1
+            model.send "#{attribute}=", 'a' * (min - 1)
+            model.valid? # force validation
+            status = false unless model.errors.invalid?(attribute)
+          end
+          
+          if !max.nil?
+            model.send "#{attribute}=", 'a' * (max + 1)
+            model.valid? # force validation
+            status = false unless model.errors.invalid?(attribute)
+          end
+          status
         end
       end
 
