@@ -81,6 +81,68 @@ describe "'validate_length_of' matcher" do
     end
   end
 
+  describe "using 'minimum'" do
+    class LengthMinimumModel < PseudoActiveRecord
+      attr_accessor :name
+      validates_length_of :name, :minimum => 2
+    end
+
+    before do
+      @model = LengthMinimumModel.new
+    end
+
+    it "should have the label 'model to validate the length of <attr> within <min> and Infinity'" do
+      validate_length_of(:foo, :minimum => 1).description.should == "model to validate the length of foo within 1 and Infinity"
+    end
+  
+    it "should match when the validation is present" do
+      @model.should validate_length_of(:name, :minimum => 2)
+    end
+  
+    it "should not match when the minimum accepted length is too low" do
+      @model.should_not validate_length_of(:name, :minimum => 3)
+    end
+  
+    it "should not match when the minimum accepted length  is too high" do
+      @model.should_not validate_length_of(:name, :minimum => 1)
+    end
+  
+    it "should not match when the validation is not present" do
+      @model.should_not validate_length_of(:foo, :minimum => 1)
+    end
+  end
+  
+  describe "using 'maximum'" do
+    class LengthMinimumModel < PseudoActiveRecord
+      attr_accessor :name
+      validates_length_of :name, :maximum => 20
+    end
+
+    before do
+      @model = LengthMinimumModel.new
+    end
+
+    it "should have the label 'model to validate the length of <attr> within 0 and <max>'" do
+      validate_length_of(:foo, :maximum => 2).description.should == "model to validate the length of foo within 0 and 2"
+    end
+  
+    it "should match when the validation is present" do
+      @model.should validate_length_of(:name, :maximum => 20)
+    end
+  
+    it "should not match when the maximum accepted length is too low" do
+      @model.should_not validate_length_of(:name, :maximum => 21)
+    end
+  
+    it "should not match when the maximum accepted length  is too high" do
+      @model.should_not validate_length_of(:name, :maximum => 19)
+    end
+  
+    it "should not match when the validation is not present" do
+      @model.should_not validate_length_of(:foo, :maximum => 1)
+    end
+  end
+
   describe "using 'is'" do
     class LengthIsModel < PseudoActiveRecord
       attr_accessor :name
