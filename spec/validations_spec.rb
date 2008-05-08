@@ -32,11 +32,11 @@ describe "'validate_presence_of' matcher" do
     validate_presence_of(:foo).description.should == "model to validate the presence of foo"
   end
   
-  it "should match for an instance when the validation is present" do
+  it "should match when the validation is present" do
     @model.should validate_presence_of(:name)
   end
   
-  it "should not match for an instance when the validation is not present" do
+  it "should not match when the validation is not present" do
     @model.should_not validate_presence_of(:foo)
   end
 end
@@ -56,19 +56,27 @@ describe "'validate_length_of' matcher" do
       validate_length_of(:foo, :within => 1...2).description.should == "model to validate the length of foo within 1 and 2"
     end
   
-    it "should match for an instance when the validation is present" do
+    it "should match when the validation is present" do
       @model.should validate_length_of(:name, :within => 2...20)
     end
   
-    it "should not match for an instance when the minimum is too low" do
+    it "should not match when the minimum accepted length is too low" do
       @model.should_not validate_length_of(:name, :within => 3...20)
     end
   
-    it "should not match for an instance when the minimum is too high" do
+    it "should not match when the minimum accepted length  is too high" do
       @model.should_not validate_length_of(:name, :within => 1...20)
     end
   
-    it "should not match for an instance when the validation is not present" do
+    it "should not match when the maximum accepted length is too low" do
+      @model.should_not validate_length_of(:name, :within => 2...21)
+    end
+  
+    it "should not match when the maximum accepted length  is too high" do
+      @model.should_not validate_length_of(:name, :within => 2...19)
+    end
+  
+    it "should not match when the validation is not present" do
       @model.should_not validate_length_of(:foo, :within => 1...2)
     end
   end
@@ -87,11 +95,11 @@ describe "'validate_length_of' matcher" do
       validate_length_of(:foo, :is => 3).description.should == "model to validate the length of foo within 3 and 3"
     end
   
-    it "should match for an instance when the validation is present" do
+    it "should match when the validation is present" do
       @model.should validate_length_of(:name, :is => 4)
     end
   
-    it "should not match for an instance when the validation is not present" do
+    it "should not match when the validation is not present" do
       @model.should_not validate_length_of(:foo, :is => 4)
     end
   end
