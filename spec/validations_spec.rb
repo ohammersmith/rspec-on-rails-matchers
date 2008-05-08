@@ -14,9 +14,6 @@ class PseudoActiveRecord < ActiveRecord::Base
       self.send("#{name}=", value) if self.respond_to?("#{name}=")
     end
   end
-  def inspect
-    "#{self.class} #{object_id}"
-  end
 end
 
 describe "'validate_presence_of' matcher" do
