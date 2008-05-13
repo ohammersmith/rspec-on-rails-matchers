@@ -1,17 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-class Response
-  def content_type; 'text/html'; end
-  def body
-    return <<-EOF
-      <html>
-        <form method="post" action="foo">
-        </form>
-      </html>
-    EOF
-  end
-end
-
 describe 'View matchers' do
   before do
     @response = mock 'response'
