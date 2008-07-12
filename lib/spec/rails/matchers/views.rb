@@ -97,6 +97,18 @@ module Spec
           with_tag("a[href=#{url_or_path}]", text).matches?(response)
         end
       end
+      
+      def with_select_for(attribute)
+        return simple_matcher("have a select for #{attribute}") do |response|
+          with_tag("select##{attribute}", text).matches?(response)
+        end
+      end
+      
+      def have_select_for(attribute)
+        return simple_matcher("have a select for #{attribute}") do |response|
+          have_tag("select##{attribute}", text).matches?(response)
+        end
+      end
     end
   end
 end
