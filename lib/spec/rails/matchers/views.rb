@@ -39,14 +39,14 @@ module Spec
       end
 
       def have_text_area_for(attribute)
-        return simple_matcher("have a text field for '#{attribute}'") do |response|
-          have_tag("textarea##{attribute}[type=text]").matches?(response)
+        return simple_matcher("have a text area field for '#{attribute}'") do |response|
+          have_tag("textarea##{attribute}").matches?(response)
         end
       end
       
       def with_text_area_for(attribute)
-        return simple_matcher("have a text field for '#{attribute}'") do |response|
-          with_tag("textarea##{attribute}[type=text]").matches?(response)
+        return simple_matcher("have a text area field for '#{attribute}'") do |response|
+          with_tag("textarea##{attribute}").matches?(response)
         end
       end
       
