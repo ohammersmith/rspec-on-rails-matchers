@@ -7,6 +7,13 @@ module Spec
           !model.valid? && model.errors.invalid?(attribute)
         end
       end
+      
+       def validate_acceptance_of(attribute)
+          return simple_matcher("model to validate the acceptance of checkbox attribute #{attribute}") do |model|
+            model.send("#{attribute}=", "0")
+            !model.valid? && model.errors.invalid?(attribute)
+          end
+        end
 
       def validate_length_of(attribute, options)
         if options.has_key? :within
