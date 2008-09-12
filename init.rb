@@ -1,4 +1,4 @@
-require 'spec/rails/matchers/active_record'
+require 'spec/rails/matchers/attributes'
 require 'spec/rails/matchers/observers'
 require 'spec/rails/matchers/associations'
 require 'spec/rails/matchers/validations'
