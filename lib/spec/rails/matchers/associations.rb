@@ -8,7 +8,8 @@ module Spec
         end
       end
       
-      def have_many(association)
+      def have_many(association, options = {})
+        return have_many_through(association, options[:through]) if options.has_key?(:through)
         return simple_matcher("model to have many #{association}") do |model|
           model = model.class if model.is_a? ActiveRecord::Base
           model.reflect_on_all_associations(:has_many).find { |a| a.name == association }
