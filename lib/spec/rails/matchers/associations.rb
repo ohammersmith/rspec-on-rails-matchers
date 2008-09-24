@@ -7,11 +7,18 @@ module Spec
           model.reflect_on_all_associations(:belongs_to).find { |a| a.name == association }
         end
       end
-
+      
       def have_many(association)
         return simple_matcher("model to have many #{association}") do |model|
           model = model.class if model.is_a? ActiveRecord::Base
           model.reflect_on_all_associations(:has_many).find { |a| a.name == association }
+        end
+      end
+
+      def have_many_through(association, through_association)
+        return simple_matcher("model to have many #{association} through #{through_association}") do |model|
+          model = model.class if model.is_a? ActiveRecord::Base
+          model.reflect_on_all_associations(:has_many).find { |a| a.name == association && a.options[:through] == through_association }
         end
       end
 
