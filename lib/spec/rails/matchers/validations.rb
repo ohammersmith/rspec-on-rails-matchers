@@ -51,6 +51,20 @@ module Spec
           !model.valid? && model.errors.invalid?(attribute)
         end
       end
+
+      def validate_inclusion_of(attribute, options)
+        enumerable = options[:in]
+        return simple_matcher("model to validate the inclusion of #{attribute} on list #{enumerable.inspect}") do |model|
+          enumerable.stub!(:include?).and_return(false, true)
+          model.send("#{attribute}=", 'something_not_included')
+          model.valid?
+          matching = model.errors.invalid?(attribute)
+          model.send("#{attribute}=", 'something_included')
+          model.valid?
+          matching = matching && !model.errors.invalid?(attribute)
+          matching
+        end
+      end
     end
   end
 end
