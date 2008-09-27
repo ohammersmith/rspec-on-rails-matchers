@@ -173,6 +173,10 @@ describe "'validate_uniqueness_of' matcher" do
 
   before do
     @model = UniquenessModel.new
+    mock_column = mock('ActiveRecord::ConnectionAdapters::Column')
+    mock_column.stub!(:text?).and_return(false)
+    UniquenessModel.stub!(:columns_hash).and_return('name' => mock_column, 'foo' => mock_column)
+    UniquenessModel.stub!(:quoted_table_name).and_return('uniqeness_models')
   end
   
   it "should have the label 'model to validate the uniqueness of <attr>'" do
