@@ -214,3 +214,32 @@ describe "'validate_confirmation_of' matcher" do
     @model.should_not validate_confirmation_of(:foo)
   end
 end
+
+describe "'validate_inclusion_of' matcher" do
+  class InclusionModel < PseudoActiveRecord
+    STATES = %w{open closed}
+    attr_accessor :state
+    validates_inclusion_of :state, :in => STATES
+  end
+
+  before do
+    @model = InclusionModel.new
+    @model.stub!(:inspect).and_return( "#<InclusionModel id: nil, state: nil, foo: nil>")
+  end
+
+  it "should have the label 'model to validate the inclusion of <attr> on list <list>'" do
+    validate_inclusion_of(:state, :in => InclusionModel::STATES).description.should == 'model to validate the inclusion of state on list ["open", "closed"]'
+  end
+
+  it "should match when the validation is present" do
+    @model.should validate_inclusion_of(:state, :in => InclusionModel::STATES)
+  end
+
+  it "should not match when the validation uses a different list" do
+    @model.should_not validate_inclusion_of(:state, :in => %w{foo bar})
+  end
+
+  it "should not match when the validation is not present" do
+    @model.should_not validate_inclusion_of(:foo, :in => %w{foo bar})
+  end
+end
