@@ -16,7 +16,7 @@ module Spec
       
       def use_before_filter(filter_name, options = {})
         return simple_matcher("controller to use before_filter #{filter_name}") do |controller|
-          raise ArgumentError unless options.has_key(:for)
+          raise ArgumentError unless options.has_key?(:for)
           # controller = controller.class if controller.is_a? ActionController::Base
           potential_filters = controller.class.filter_chain.select do |filter| 
             filter.before? && filter.method == filter_name.to_sym
