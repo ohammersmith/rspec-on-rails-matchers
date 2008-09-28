@@ -28,20 +28,3 @@ module Spec
     end
   end
 end
-
-def should_not_skip?(controller)
-  if options[:skip]
-    !included_in_action?(controller, options[:skip])
-  else
-    true
-  end
-end
-
-def included_in_action?(controller, options)
-  if options[:only]
-    Array(options[:only]).map(&:to_s).include?(controller.action_name)
-  elsif options[:except]
-    !Array(options[:except]).map(&:to_s).include?(controller.action_name)
-  else
-    true
-  end
