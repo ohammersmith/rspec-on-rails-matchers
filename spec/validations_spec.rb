@@ -243,3 +243,28 @@ describe "'validate_inclusion_of' matcher" do
     @model.should_not validate_inclusion_of(:foo, :in => %w{foo bar})
   end
 end
+
+describe "'validate_numericality_of' matcher" do
+  class NumericalityModel < PseudoActiveRecord
+    attr_accessor :number
+    validates_numericality_of :number
+  end
+
+  before do
+    @model = NumericalityModel.new
+    @model.stub!(:inspect).and_return( "#<NumericalityModel id: nil, number: nil, foo: nil>")
+  end
+  
+  it "should have the label 'model to validate the numericality of <attr>'" do
+    validate_numericality_of(:foo).description.should == "model to validate the numericality of foo"
+  end
+  
+  it "should match when the validation is present" do
+    @model.should validate_numericality_of(:number)
+  end
+  
+  it "should not match when the validation is not present" do
+    @model.should_not validate_numericality_of(:foo)
+  end
+end
+

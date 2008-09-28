@@ -9,7 +9,7 @@ module Spec
       end
 
       def validate_numericality_of(attribute)
-        return simple_matcher("validate the numericality of #{attribute}") do |model|
+        return simple_matcher("model to validate the numericality of #{attribute}") do |model|
           model.send("#{attribute}=", 'foo')
           !model.valid? && model.errors.invalid?(attribute)
         end
