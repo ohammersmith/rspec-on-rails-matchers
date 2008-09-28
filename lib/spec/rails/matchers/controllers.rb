@@ -22,7 +22,7 @@ module Spec
             filter.before? && filter.method == filter_name.to_sym
           end
           return false if potential_filters.empty?
-          potential_filters.first.should_run_callback?(ControllerActionFacade.new(controller, options[:for]))
+          potential_filters.first.send(:should_run_callback?, ControllerActionFacade.new(controller, options[:for]))
         end
       end
     end
