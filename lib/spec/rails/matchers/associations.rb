@@ -28,6 +28,13 @@ module Spec
           model.reflect_on_all_associations(:has_and_belongs_to_many).find { |a| a.name == association }
         end
       end
+
+      def be_composed_of(aggregation)
+        return simple_matcher("model to be composed of #{aggregation}") do |model|
+          model = model.class if model.is_a? ActiveRecord::Base
+          model.reflect_on_all_aggregations.find { |a| a.name == aggregation }
+        end
+      end
     end
   end
 end
