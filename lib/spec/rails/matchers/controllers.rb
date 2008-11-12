@@ -19,7 +19,7 @@ module Spec
       end
       
       def use_filter(kind, name, options = {})
-        return simple_matcher("controller to use before_filter #{filter_name}") do |controller|
+        return simple_matcher("controller to use before_filter #{name}") do |controller|
           raise ArgumentError unless options.has_key?(:for)
           # controller = controller.class if controller.is_a? ActionController::Base
           potential_filters = controller.class.filter_chain.select do |filter| 
