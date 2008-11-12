@@ -2,11 +2,15 @@ module Spec
   module Rails
     module Matchers
       class ControllerActionFacade
-        attr_reader :action_name
+        attr_reader :action
         
         def initialize(controller_instance, action_name)
           @controller_instance = controller_instance
-          @action_name = action_name
+          @action = action_name
+        end
+        
+        def action_name
+          @action
         end
         
         def method_missing(meth, *args)
