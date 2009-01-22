@@ -7,15 +7,15 @@ Setup
 Dependencies:
 -------------
 
-  * rspec
-  * rspec_on_rails
+* `rspec`
+* `rspec_on_rails`
 
 Overview
 --------
 
 Adds the following RSpec matchers:
 
-  * Associations:
+* Associations:
     Verify that the association has been defined. (doesn't verify that the association works!)
 
     object.should have_many(:association)
@@ -35,7 +35,7 @@ Adds the following RSpec matchers:
     TM snippet: [mshabtm + tab]
 
 
-  * Validations:
+* Validations:
     Verify that a validation has been defined. (doesn't test the validation itself)
 
     object.should validate_presence_of(:attribute)
@@ -51,13 +51,13 @@ Adds the following RSpec matchers:
     object.should validate_length_of(:attribute, :is => 5)
     TM snippet: [msvl + tab]
 
-  * Observers:
+* Observers:
     Verify that the observer is observing a class. (doesn't verify that the observation works)
     
     object.should observe(:model)
     example: GroupObserver.should observe(Group)
 
-  * Views:
+* Views:
     Verifies that the views contains some tags.
 
     response.should have_form_posting_to(url_or_path)
@@ -83,7 +83,7 @@ Adds the following RSpec matchers:
     response.should have_link_to(url_or_path, "optional_text")
     TM snippet: [hlt + tab]
 
-    * nested view tests:
+  * nested view tests:
       for instance:
 
       response.should have_form_posting_to(url_or_path) do
@@ -173,15 +173,15 @@ In your model spec:
 Core Contributors
 -----------------
 
-  * Josh Knowles <joshknowles@gmail.com>
-  * Bryan Helmkamp <bryan@brynary.com>
-  * Matt Aimonetti <mattaimonetti@gmail.com>
+* Josh Knowles <joshknowles@gmail.com>
+* Bryan Helmkamp <bryan@brynary.com>
+* Matt Aimonetti <mattaimonetti@gmail.com>
 
 Contributors
 -------------
 
-  * ckknight
-  * Matt Pelletier
-  * Luke Melia
+* ckknight
+* Matt Pelletier
+* Luke Melia
 
 Copyright (c) 2008 The Plugin Development Team, released under the MIT license
