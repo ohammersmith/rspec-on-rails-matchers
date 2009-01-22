@@ -17,7 +17,7 @@ Adds the following RSpec matchers:
 
 * Associations:
   Verify that the association has been defined. (doesn't verify that the association works!)
-    
+
     object.should have_many(:association)
     example: @post.should have_many(:comments)
     TM snippet: [mshm + tab] (Model Should Have Many)
@@ -36,7 +36,7 @@ Adds the following RSpec matchers:
 
 * Validations:
   Verify that a validation has been defined. (doesn't test the validation itself)
-    
+
     object.should validate_presence_of(:attribute)
     TM snippet: [msvp + tab]
     
@@ -58,7 +58,7 @@ Adds the following RSpec matchers:
 
 * Views:
   Verifies that the views contains some tags.
-    
+
     response.should have_form_posting_to(url_or_path)
     TM snippet: [hfpt + tab]
     
@@ -84,7 +84,7 @@ Adds the following RSpec matchers:
 
   * nested view tests:
     for instance:
-      
+
       response.should have_form_posting_to(url_or_path) do
         with_text_field_for(:attribute)
       end
