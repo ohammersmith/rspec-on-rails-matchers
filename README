@@ -19,6 +19,12 @@ Overview
 
 Adds the following RSpec matchers:
 
+  * Attribute mass-assignment
+    Verefy that attribute accesible or protected
+    
+    Account.should allow_mass_assignment_of(:email, :name, :password, :password_confirmation)
+    Account.should deny_mass_assignment_of(:remember_token, :crypted_password)
+
   * Associations:
     Verify that the association has been defined. (doesn't verify that the association works!)
 

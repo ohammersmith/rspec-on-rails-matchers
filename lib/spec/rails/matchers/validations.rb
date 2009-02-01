@@ -103,6 +103,8 @@ module Spec
       def validate_uniqueness_of(attribute)
         return simple_matcher("model to validate the uniqueness of #{attribute}") do |model|
           model.class.stub!(:find).and_return(true)
+          # TODO negonicrac's way, might be better/needed for rails 2.x supoprt, not sure.. will test
+          #model.class.stub!(:with_exclusive_scope).and_return([model])
           !model.valid? && model.errors.invalid?(attribute)
         end
       end
@@ -111,6 +113,20 @@ module Spec
         return simple_matcher("model to validate the confirmation of #{attribute}") do |model|
           model.send("#{attribute}_confirmation=", 'asdf')
           !model.valid? && model.errors.invalid?(attribute)
+        end
+      end
+
+      def validate_inclusion_of(attribute, options)
+        enumerable = options[:in]
+        return simple_matcher("model to validate the inclusion of #{attribute} on list #{enumerable.inspect}") do |model|
+          enumerable.stub!(:include?).and_return(false, true)
+          model.send("#{attribute}=", 'something_not_included')
+          model.valid?
+          matching = model.errors.invalid?(attribute)
+          model.send("#{attribute}=", 'something_included')
+          model.valid?
+          matching = matching && !model.errors.invalid?(attribute)
+          matching
         end
       end
     end

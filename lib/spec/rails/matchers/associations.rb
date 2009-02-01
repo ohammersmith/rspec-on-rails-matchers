@@ -56,7 +56,14 @@ module Spec
       def have_one(name, options = {})
         Association.new(:has_one, name, options)
       end
-
+      
+      def be_composed_of(aggregation)
+        # TODO rewrite to use new style instead of a simple_matcher
+        return simple_matcher("model to be composed of #{aggregation}") do |model|
+          model = model.class if model.is_a? ActiveRecord::Base
+          model.reflect_on_all_aggregations.find { |a| a.name == aggregation }
+        end
+      end
     end
   end
 end
