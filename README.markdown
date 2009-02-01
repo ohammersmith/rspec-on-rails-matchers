@@ -1,6 +1,17 @@
 rspec-on-rails-matchers
 =======================
 
+Note: some of this documentation is wrong. For instance, `has_form_for` doesn't
+take a block so the nested form specs don't/can't work. I hope to sort it out
+soon enough and update this. -OJH
+
+If you're looking at the network graph right now it looks like I merged all
+the stuff in. But right now I haven't actually verified any of it actually
+works. For the time-being if you actually use this code, use someone else's
+fork or the `stableish` branch I created.
+
+Actual fixes will be forthcoming.
+
 Setup
 ------
 
@@ -187,5 +198,6 @@ Contributors
 * ckknight
 * Matt Pelletier
 * Luke Melia
+* Otto Hammersmith (merge wizardry for the moment)
 
 Copyright (c) 2008 The Plugin Development Team, released under the MIT license
