@@ -62,6 +62,13 @@ module Spec
           !model.valid? && model.errors.invalid?(attribute)
         end
       end
+      
+       def validate_acceptance_of(attribute)
+          return simple_matcher("model to validate the acceptance of checkbox attribute #{attribute}") do |model|
+            model.send("#{attribute}=", "0")
+            !model.valid? && model.errors.invalid?(attribute)
+          end
+        end
 
       def validate_numericality_of(attribute)
         return simple_matcher("validate the numericality of #{attribute}") do |model|
