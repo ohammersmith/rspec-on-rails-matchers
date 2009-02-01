@@ -1,6 +1,10 @@
 rspec-on-rails-matchers
 =======================
 
+Note: some of this documentation is wrong. For instance, has_form_for doesn't
+take a block so the nested form specs don't/can't work. I hope to sort it out
+soon enough and update this. -OJH
+
 Setup
 ------
 
