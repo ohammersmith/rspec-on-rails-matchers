@@ -109,9 +109,13 @@ module Spec
 
       def validate_uniqueness_of(attribute)
         return simple_matcher("model to validate the uniqueness of #{attribute}") do |model|
-          # model.class.stub!(:find).and_return(true)
-          # This is the rails 2.1 change, should have picked it up earlier.  More clear when checking out smtlaissezfaire's master.
+<<<<<<< HEAD:lib/spec/rails/matchers/validations.rb
+          model.class.stub!(:find).and_return(true)
+          # TODO negonicrac's way, might be better/needed for rails 2.x supoprt, not sure.. will test
+          #model.class.stub!(:with_exclusive_scope).and_return([model])
+=======
           model.class.stub!(:with_exclusive_scope).and_return([model])
+>>>>>>> smtlaissezfaire/master:lib/spec/rails/matchers/validations.rb
           !model.valid? && model.errors.invalid?(attribute)
         end
       end
