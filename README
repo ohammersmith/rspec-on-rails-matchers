@@ -5,6 +5,10 @@ Note: some of this documentation is wrong. For instance, has_form_for doesn't
 take a block so the nested form specs don't/can't work. I hope to sort it out
 soon enough and update this. -OJH
 
+BTW if the Network Graph hasn't made it obvious, I'm attempting to merge in
+all the disparate changes. I wouldn't trust this repo to be even remotely
+correct until I get some of the specs merge & checked for validity.
+
 Setup
 ------
 
