@@ -1,1 +1,3 @@
 coverage
+*.tmproj
+.DS_Store
