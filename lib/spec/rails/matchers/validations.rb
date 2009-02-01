@@ -63,6 +63,13 @@ module Spec
         end
       end
 
+      def validate_numericality_of(attribute)
+        return simple_matcher("validate the numericality of #{attribute}") do |model|
+          model.send("#{attribute}=", 'foo')
+          !model.valid? && model.errors.invalid?(attribute)
+        end
+      end
+
       def validate_length_of(attribute, options)
         if options.has_key? :within
           min = options[:within].first
