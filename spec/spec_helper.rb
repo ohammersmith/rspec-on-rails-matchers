@@ -1,12 +1,15 @@
-require 'spec'
-require 'activerecord'
-
-Dir.glob(File.dirname(__FILE__) + '/../lib/spec/rails/matchers/*.rb').each do |f|
-  require f
+begin
+  require 'rubygems'
+  require 'spec'
+  
+rescue LoadError
+  puts "Please install rspec and mocha to run the tests."
+  exit 1
 end
 
-include Spec::Rails::Matchers
+$:.push(File.dirname(__FILE__) + '/../lib')
 
-# Dir.glob(File.dirname(__FILE__) + '/../rspec_on_rails/**/*.rb').each do |f|
-#   require f
-# end
+# TODO need this?
+#Spec::Runner.configure do |config|
+#  config.mock_with :mocha
+#end
