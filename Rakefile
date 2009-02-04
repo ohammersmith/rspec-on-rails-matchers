@@ -1,6 +1,6 @@
 require 'rake'
 require 'spec/rake/spectask'
-#require 'spec/rake/verify_rcov'
+require 'spec/rake/verify_rcov'
 
 task :default => [:spec] #, :verify_rcov]
 
