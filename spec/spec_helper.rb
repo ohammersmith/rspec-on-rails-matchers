@@ -1,8 +1,10 @@
-require 'rubygems'
-require 'spec'
-require 'spec/rails'
-require 'activerecord'
+begin
+  require 'spec'
+rescue LoadError
+  require 'rubygems'
+  gem 'rspec'
+  require 'spec'
+end
 
-$:.push(File.dirname(__FILE__) + '/../lib')
-include Spec::Rails::Matchers
-
+$:.unshift(File.dirname(__FILE__) + '/../lib')
+require 'rspec-on-rails-matchers'
