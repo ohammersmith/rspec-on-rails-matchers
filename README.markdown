@@ -1,3 +1,5 @@
+Don't use me.  I'm out of date and I break shoulda.  Shoulda works with rspec now.  Use that.
+
 rspec-on-rails-matchers
 =======================
 
